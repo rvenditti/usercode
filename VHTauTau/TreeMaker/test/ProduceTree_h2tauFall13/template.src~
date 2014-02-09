@@ -28,12 +28,12 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 # Global Tag
 #-------------
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-process.GlobalTag.globaltag = 'START53_V11::All'
+process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
 #-------------
 # Output ROOT file
 #-------------
 process.TFileService = cms.Service("TFileService",
-  fileName = cms.string('test_53x.root')
+  fileName = cms.string('/lustre/cms/store/user/rosma/UpgradePh1_FullSim_16July/GluGluToHToTauTau_M-125_14TeV_PU0_GEM/histo_file_DataXX.root')
 )
 #--------------------------------------------------
 # VHTauTau Tree Specific
@@ -49,7 +49,7 @@ process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 process.load("PhysicsTools.PatAlgos.patSequences_cff")
 
 import PhysicsTools.PatAlgos.tools.tauTools as tauTools
-#tauTools.switchToPFTauHPS(process) # For HPS Taus
+tauTools.switchToPFTauHPS(process) # For HPS Taus
 
 ## --
 ## Switch on PAT trigger
@@ -66,5 +66,5 @@ process.p = cms.Path(
 # List File names here
 #---------------------------------------
 process.PoolSource.fileNames = [
-  'file:/cmshome/venditti/PatProduction_5312/CMSSW_5_3_12/src/WHAnalysis/Configuration/test/CRAB/patTuple.root'
+ #PALLE
 ]

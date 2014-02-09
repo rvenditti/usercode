@@ -15,7 +15,6 @@ process.maxEvents = cms.untracked.PSet(
   input = cms.untracked.int32(-1)
 )
 process.options = cms.untracked.PSet( wantSummary = cms.untracked.bool(False) )
-
 #-----------------------------
 # Geometry
 #-----------------------------
@@ -28,12 +27,12 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 # Global Tag
 #-------------
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-process.GlobalTag.globaltag = 'START53_V11::All'
+process.GlobalTag.globaltag = 'FT_53_V21_AN4::All'
 #-------------
 # Output ROOT file
 #-------------
 process.TFileService = cms.Service("TFileService",
-  fileName = cms.string('test_53x.root')
+  fileName = cms.string('/lustre/cms/store/user/rosma/UpgradePh1_FullSim_16July/GluGluToHToTauTau_Fall13_Tree/tree5.root')
 )
 #--------------------------------------------------
 # VHTauTau Tree Specific
@@ -41,30 +40,29 @@ process.TFileService = cms.Service("TFileService",
 process.load("VHTauTau.TreeMaker.TreeCreator_cfi")
 process.load("VHTauTau.TreeMaker.TreeWriter_cfi")
 process.load("VHTauTau.TreeMaker.TreeContentConfig_cff")
-
 #-------------------------------------------------------
 # PAT 
 #------------------------------------------------------
 process.load("RecoTauTag.Configuration.RecoPFTauTag_cff")
 process.load("PhysicsTools.PatAlgos.patSequences_cff")
-
 import PhysicsTools.PatAlgos.tools.tauTools as tauTools
-#tauTools.switchToPFTauHPS(process) # For HPS Taus
-
+tauTools.switchToPFTauHPS(process) # For HPS Taus
 ## --
 ## Switch on PAT trigger
 ## --
 import PhysicsTools.PatAlgos.tools.trigTools as trigTools
 trigTools.switchOnTrigger( process, outputModule='' ) # This is optional and can be omitted.
-
 process.p = cms.Path(
   process.treeCreator +
   process.treeContentSequence +
   process.treeWriter
 )
-
 # List File names here
 #---------------------------------------
 process.PoolSource.fileNames = [
-  'file:/cmshome/venditti/PatProduction_5312/CMSSW_5_3_12/src/WHAnalysis/Configuration/test/CRAB/patTuple.root'
+'file:/lustre/cms/store/user/rosma/GluGluToHToTauTau_M-125_13TeV_Fall13dr_PU20bx25_POSTLS162/patTuple_32_1_YzY.root',
+'file:/lustre/cms/store/user/rosma/GluGluToHToTauTau_M-125_13TeV_Fall13dr_PU20bx25_POSTLS162/patTuple_33_1_aDb.root',
+'file:/lustre/cms/store/user/rosma/GluGluToHToTauTau_M-125_13TeV_Fall13dr_PU20bx25_POSTLS162/patTuple_34_1_2IH.root',
+'file:/lustre/cms/store/user/rosma/GluGluToHToTauTau_M-125_13TeV_Fall13dr_PU20bx25_POSTLS162/patTuple_35_1_ext.root',
+'file:/lustre/cms/store/user/rosma/GluGluToHToTauTau_M-125_13TeV_Fall13dr_PU20bx25_POSTLS162/patTuple_36_1_f8H.root',
 ]

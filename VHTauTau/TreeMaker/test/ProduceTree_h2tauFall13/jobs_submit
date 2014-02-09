@@ -1,0 +1,10 @@
+qsub -f -q jobs_0  >> job_output_0
+qsub -f -q jobs_1  >> job_output_1
+qsub -f -q jobs_2  >> job_output_2
+qsub -f -q jobs_3  >> job_output_3
+qsub -f -q jobs_4  >> job_output_4
+qsub -f -q jobs_5  >> job_output_5
+qsub -f -q jobs_6  >> job_output_6
+qsub -f -q jobs_7  >> job_output_7
+qsub -f -q jobs_8  >> job_output_8
+qsub -f -q jobs_9  >> job_output_9
