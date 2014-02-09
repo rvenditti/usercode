@@ -64,7 +64,6 @@ vhtm::Electron::Electron() :
   isoTrk04(-999),
   isoRel03(-999),
   isoRel04(-999),
-  missingHits(-1),
   vx(-999),
   vy(-999),
   vz(-999),
@@ -81,6 +80,7 @@ vhtm::Electron::Electron() :
   chargedHadronIso(-999),
   neutralHadronIso(-999),
   photonIso(-999),
+  missingHits(-1),
   dB(-999),
   edB(-999),
   dB3d(-999),
@@ -93,7 +93,29 @@ vhtm::Electron::Electron() :
   scHEEPTrkIso(-999),
   nBrems(-1),
   fbrem(-999),
-  idMVA(-999),
+  dist_vec(-999),
+  dCotTheta(-99),
+  hasMatchedConv(false),
+  mva(-999),
+  mvaPOGTrig(-999),
+  mvaPOGNonTrig(-999),
+  mvaPreselection(false),
+  isTriggerElectron(false),
+  isoMVA(-999),
+  pfRelIso03v1(-999),
+  pfRelIso03v2(-999),
+  pfRelIsoDB03v1(-999),
+  pfRelIsoDB03v2(-999),
+  pfRelIsoDB03v3(-999),
+  pfRelIso04v1(-999),
+  pfRelIso04v2(-999),
+  pfRelIsoDB04v1(-999),
+  pfRelIsoDB04v2(-999),
+  pfRelIsoDB04v3(-999),
+  pfRelIso03(-999),
+  pfRelIso04(-999),
+  pfRelIsoDB03(-999),
+  pfRelIsoDB04(-999),
   selbit(0),
   fidFlag(0) 
 {}
@@ -179,28 +201,94 @@ vhtm::Tau::Tau():
   ptSumPFChargedHadronsIsoCone(-999),
   ptSumPFNeutralHadronsIsoCone(-999),
   ptSumPhotonsIsoCone(-999),
+
   decayModeFinding(-1),
-  looseIsolation(-1),
-  mediumIsolation(-1),
-  tightIsolation(-1),
-  againstMuonLoose(-1),
-  againstMuonTight(-1),
-  againstElectronLoose(-1), 
-  againstElectronMedium(-1), 
-  againstElectronTight(-1), 
-  pfElectronMVA(-999),
-  againstElectronMVA(-1),
-  byVLooseCombinedIsolationDeltaBetaCorr(-1),
+  decayModeFindingNewDMs(-1),
+  decayModeFindingOldDMs(-1),
+  chargedIsoPtSum(-1),
+  neutralIsoPtSum(-1),
+  puCorrPtSum(-1),
+
+  ChHadCandPt3Prong_1track(-1),
+  ChHadCandPt3Prong_2track(-1),
+  ChHadCandPt3Prong_3track(-1),
+
+  ChHadCandEta3Prong_1track(-10),
+  ChHadCandEta3Prong_2track(-10),
+  ChHadCandEta3Prong_3track(-10),
+
+  ChHadCandPhi3Prong_1track(-10),
+  ChHadCandPhi3Prong_2track(-10),
+  ChHadCandPhi3Prong_3track(-10),
+  
+  ChHadCandPt1Prong(-1),
+  ChHadCandEta1Prong(-10),
+  ChHadCandPhi1Prong(-10),
+
+  CombinedIsolationDeltaBetaCorrRaw3Hits(-1),
+  CombinedIsolationDeltaBetaCorrRaw(-1),
+  byIsolationMVA3newDMwLTraw(-1),
+  byIsolationMVA3newDMwoLTraw(-1),
+  byIsolationMVA3oldDMwLTraw(-1),
+  byIsolationMVA3oldDMwoLTraw(-1),
+
   byLooseCombinedIsolationDeltaBetaCorr(-1),
+  byLooseCombinedIsolationDeltaBetaCorr3Hits(-1),
+
   byMediumCombinedIsolationDeltaBetaCorr(-1),
+  byMediumCombinedIsolationDeltaBetaCorr3Hits(-1),
+
+
   byTightCombinedIsolationDeltaBetaCorr(-1),
-  byVLooseIsolationDeltaBetaCorr(-1),
-  byLooseIsolationDeltaBetaCorr(-1),
-  byMediumIsolationDeltaBetaCorr(-1),
-  byTightIsolationDeltaBetaCorr(-1),
-  byLooseIsolationMVA(-1),
-  byMediumIsolationMVA(-1),
-  byTightIsolationMVA(-1),
+  byTightCombinedIsolationDeltaBetaCorr3Hits(-1),
+
+  byLooseIsolationMVA3newDMwLT(-1),
+  byLooseIsolationMVA3newDMwoLT(-1),
+  byLooseIsolationMva3oldDMwLT(-1),
+  byLooseIsolationMVA3oldDMwoLT(-1),
+
+  byMediumIsolationMVA3newDMwLT(-1),
+
+  byMediumIsolationMVA3newDMwoLT(-1),
+  byMediumIsolationMva3oldDMwLT(-1),
+  byMediumIsolationMVA3oldDMwoLT(-1),
+
+  byTightIsolationMVA3newDMwLT(-1),
+  byTightIsolationMVA3newDMwoLT(-1),
+  byTightIsolationMva3oldDMwLT(-1),
+  byTightIsolationMVA3oldDMwoLT(-1),
+
+
+      // discriminators against electrons/muons
+  againstMuonLoose(-1),      
+  againstMuonLoose2(-1),     
+  againstMuonLoose3(-1),     
+  againstMuonLooseMVA(-1),   
+  againstMuonTight(-1),
+  
+  againstMuonTight2(-1),    
+  againstMuonTight3(-1),    
+  againstMuonTightMVA(-1),  
+  againstElectronLoose(-1), 
+  againstElectronMedium(-1),
+  againstElectronTight(-1),
+  pfElectronMVA(-1),        
+                            
+
+      // ElectronIDMVA, electron faking tau
+  againstElectronMVALooseMVA5(-1),
+  againstElectronMVAMediumMVA5(-1),
+  againstElectronMVATightMVA5(-1), 
+
+  byVLooseCombinedIsolationDeltaBetaCorr(-1),
+     
+   
+      // MVA based isolation
+  byLooseIsolationMVA(-1),                   
+  byMediumIsolationMVA(-1),                  
+  byTightIsolationMVA(-1),                  
+
+
   jetPt(-999),
   jetEta(-999),
   jetPhi(-999),
@@ -216,11 +304,35 @@ vhtm::Tau::Tau():
   etaphiMoment(-999),
   vx(-999), vy(-999), vz(-999),
   zvertex(-999), ltsipt(-999),
+
+  TauVertexPos_x(-999),
+  TauVertexPos_y(-999),
+  TauVertexPos_z(-999),
+
+  PVPos_x(-999),
+  PVPos_y(-999),
+  PVPos_z(-999),
+
+  FlightLengh(-999),
+  FlightLenghtSig(-999),
+  DXY(-999),
+  DXY_err(-999),
+  DXY_sig(-999),
+
+  NumChHad(-1),
   selbit(0) 
 {
+
   for (int i = 0; i < kMaxPFChargedCand; ++i) {
     sigChHadCandPt[i] = sigChHadCandEta[i] = sigChHadCandPhi[i] = 
     isoChHadCandPt[i] = isoChHadCandEta[i] = isoChHadCandPhi[i] = -10;
+
+    // ChHadCandPt[i]=-10;
+    //ChHadCandEta[i]=-20;
+    //ChHadCandPhi[i]=-20;
+    //    ChHadCandEnergy[i]=-20;
+
+  
   }
   for (int i = 0; i < kMaxPFNeutralCand; ++i) {
     sigNeHadCandPt[i] = sigNeHadCandEta[i] = sigNeHadCandPhi[i] =
@@ -230,6 +342,8 @@ vhtm::Tau::Tau():
   }
 }
 vhtm::Muon::Muon() :
+  isTrackerMuon(false),
+  isPFMuon(false),
   eta(-999),
   phi(-999),
   pt(-999),
@@ -257,7 +371,6 @@ vhtm::Muon::Muon() :
   matches(-1),
   trackerLayersWithMeasurement(-1),
   pfRelIso(-999),
-  isTrackerMuon(false),
   vx(-999),
   vy(-999),
   vz(-999),
@@ -273,6 +386,19 @@ vhtm::Muon::Muon() :
   stationMask(0),
   stationGapMaskDistance(0),
   stationGapMaskPull(0),
+  muonID(-1), 
+  idMVA(-999),
+  isoRingsMVA(-999),
+  isoRingsRadMVA(-999),
+  idIsoCombMVA(-999),
+  pfRelIso03v1(-999),
+  pfRelIso03v2(-999),
+  pfRelIsoDB03v1(-999),
+  pfRelIsoDB03v2(-999),
+  pfRelIso04v1(-999),
+  pfRelIso04v2(-999),
+  pfRelIsoDB04v1(-999),
+  pfRelIsoDB04v2(-999),
   selbit(0)
 {}
 

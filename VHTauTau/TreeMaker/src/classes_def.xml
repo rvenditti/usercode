@@ -6,7 +6,7 @@
     <version ClassVersion="1" checksum="3121422649" />
   </class>
   <class name="vhtm::Electron" ClassVersion="1">
-    <version ClassVersion="1" checksum="1063260960" />
+    <version ClassVersion="1" checksum="1488844736" />
   </class>
   <class name="vhtm::GenParticle" ClassVersion="1">
     <version ClassVersion="1" checksum="2109007915" />
@@ -21,10 +21,10 @@
     <version ClassVersion="1" checksum="1036931265" />
   </class>
   <class name="vhtm::Tau" ClassVersion="1">
-    <version ClassVersion="1" checksum="2639882672" />
+    <version ClassVersion="1" checksum="2477470325" />
   </class>
   <class name="vhtm::Muon" ClassVersion="1">
-    <version ClassVersion="1" checksum="2595004902" />
+    <version ClassVersion="1" checksum="1276554683" />
   </class>
   <class name="vhtm::Jet" ClassVersion="1">
     <version ClassVersion="1" checksum="1658972490"/>

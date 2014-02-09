@@ -132,8 +132,35 @@ namespace vhtm {
        int nBrems;
      float fbrem;
   
-     float idMVA;
+     float dist_vec;
+     float dCotTheta;
+     float hasMatchedConv;
+    
+     float mva;
+     float mvaPOGTrig;
+     float mvaPOGNonTrig;
+     bool mvaPreselection;
+     bool isTriggerElectron;
+
+     float isoMVA;
    
+     float pfRelIso03v1;
+     float pfRelIso03v2;
+     float pfRelIsoDB03v1;
+     float pfRelIsoDB03v2;
+     float pfRelIsoDB03v3;
+
+     float pfRelIso04v1;
+     float pfRelIso04v2;
+     float pfRelIsoDB04v1;
+     float pfRelIsoDB04v2;
+     float pfRelIsoDB04v3;
+
+     float pfRelIso03;
+     float pfRelIso04;
+     float pfRelIsoDB03;
+     float pfRelIsoDB04;
+
        int selbit;
        int fidFlag;
 
@@ -208,7 +235,7 @@ namespace vhtm {
     double phi;
     double pt;
     double energy;
-       int charge;
+    int charge;
     double mass;
   
     double leadTrkPt; 
@@ -263,34 +290,109 @@ namespace vhtm {
     double isoGammaCandEta[kMaxPFNeutralCand];
     double isoGammaCandPhi[kMaxPFNeutralCand];
 
-     // tau id. discriminators
-     float decayModeFinding;
-     float looseIsolation;
-     float mediumIsolation;
-     float tightIsolation;
+
+    // std::vector<double> ChHadCandPt;
+    //std::vector<double> ChHadCandEta;
+    //std::vector<double> ChHadCandPhi;
+    
+    //    double    ChHadCandEnergy[kMaxPFNeutralCand];
+
+    // double ChHadCandPt[6];
+    // double ChHadCandEta[6];
+    //double ChHadCandPhi[6];
+
+
+    /////////////////
+    float decayModeFinding;
+    float   decayModeFindingNewDMs; 
+    float   decayModeFindingOldDMs;
+    
+    float  chargedIsoPtSum ;
+    float neutralIsoPtSum;
+    float puCorrPtSum;
+
+  double ChHadCandPt3Prong_1track;
+  double ChHadCandPt3Prong_2track;
+  double ChHadCandPt3Prong_3track;
+
+  double ChHadCandEta3Prong_1track;
+  double ChHadCandEta3Prong_2track;
+  double ChHadCandEta3Prong_3track;
+
+  double ChHadCandPhi3Prong_1track;
+  double ChHadCandPhi3Prong_2track;
+  double ChHadCandPhi3Prong_3track;
+
+  double ChHadCandPt1Prong;
+  double ChHadCandEta1Prong;
+  double ChHadCandPhi1Prong;
+
+  float CombinedIsolationDeltaBetaCorrRaw3Hits;
+  float CombinedIsolationDeltaBetaCorrRaw;
+  float byIsolationMVA3newDMwLTraw;
+  float byIsolationMVA3newDMwoLTraw;
+  float byIsolationMVA3oldDMwLTraw;
+  float byIsolationMVA3oldDMwoLTraw;
+
+  float byLooseCombinedIsolationDeltaBetaCorr;
+  float byLooseCombinedIsolationDeltaBetaCorr3Hits;
+
+  float byMediumCombinedIsolationDeltaBetaCorr;
+  float byMediumCombinedIsolationDeltaBetaCorr3Hits;
+
+
+  float byTightCombinedIsolationDeltaBetaCorr;
+  float byTightCombinedIsolationDeltaBetaCorr3Hits;
+
+  float byLooseIsolationMVA3newDMwLT;
+  float byLooseIsolationMVA3newDMwoLT;
+  float byLooseIsolationMva3oldDMwLT;
+  float byLooseIsolationMVA3oldDMwoLT;
+
+  float byMediumIsolationMVA3newDMwLT;
+
+  float byMediumIsolationMVA3newDMwoLT;
+  float byMediumIsolationMva3oldDMwLT;
+  float byMediumIsolationMVA3oldDMwoLT;
+
+  float byTightIsolationMVA3newDMwLT;
+  float byTightIsolationMVA3newDMwoLT;
+  float byTightIsolationMva3oldDMwLT;
+  float byTightIsolationMVA3oldDMwoLT;
+
+    // discriminators against electrons/muons
+  float againstMuonLoose;      
+  float againstMuonLoose2;     
+  float againstMuonLoose3;     
+  float againstMuonLooseMVA;   
+  float againstMuonTight;
   
-     // discriminators against electrons/muons
-     float againstMuonLoose;
-     float againstMuonTight;
-     float againstElectronLoose; 
-     float againstElectronMedium; 
-     float againstElectronTight; 
-     float pfElectronMVA;
-     float againstElectronMVA;
-  
-     float byVLooseCombinedIsolationDeltaBetaCorr;
-     float byLooseCombinedIsolationDeltaBetaCorr;
-     float byMediumCombinedIsolationDeltaBetaCorr;
-     float byTightCombinedIsolationDeltaBetaCorr;
-     float byVLooseIsolationDeltaBetaCorr;
-     float byLooseIsolationDeltaBetaCorr;
-     float byMediumIsolationDeltaBetaCorr;
-     float byTightIsolationDeltaBetaCorr;
-  
-     // MVA Isolation
-     float byLooseIsolationMVA;
-     float byMediumIsolationMVA;
-     float byTightIsolationMVA;
+  float againstMuonTight2;    
+  float againstMuonTight3;    
+  float againstMuonTightMVA;  
+  float againstElectronLoose; 
+  float againstElectronMedium;
+  float againstElectronTight;
+ float  pfElectronMVA;        
+                            
+
+      // ElectronIDMVA, electron faking tau
+  float againstElectronMVALooseMVA5;
+  float againstElectronMVAMediumMVA5;
+  float againstElectronMVATightMVA5; 
+
+  float byVLooseCombinedIsolationDeltaBetaCorr;
+     
+   
+      // MVA based isolation
+  float byLooseIsolationMVA;                   
+  float byMediumIsolationMVA;                  
+  float byTightIsolationMVA;                  
+
+
+
+    //////////// 
+
 
      // kinematic variables for PFJet associated to PFTau
     double jetPt;
@@ -315,8 +417,22 @@ namespace vhtm {
   
     double zvertex;
     double ltsipt;
-  
-       int selbit;
+    double    TauVertexPos_x;
+    double      TauVertexPos_y;
+    double   TauVertexPos_z;
+    double     PVPos_x;
+    double  PVPos_y;
+    double  PVPos_z;
+    
+    double    FlightLengh;
+    double  FlightLenghtSig;
+    double  DXY;
+    double  DXY_err;
+    double      DXY_sig;
+    
+
+    int NumChHad;
+    int selbit;
   
     ClassDef(Tau, 1) 
   };
@@ -325,6 +441,7 @@ namespace vhtm {
     Muon();
     ~Muon() {}
       bool isTrackerMuon;
+      bool isPFMuon;
     double eta;
     double phi;
     double pt;
@@ -372,7 +489,22 @@ namespace vhtm {
        unsigned int stationMask;
        unsigned int stationGapMaskDistance;
        unsigned int stationGapMaskPull;
+       int muonID;
      
+       float idMVA;
+       float isoRingsMVA;
+       float isoRingsRadMVA;
+       float idIsoCombMVA;
+
+       float pfRelIso03v1;
+       float pfRelIso03v2;
+       float pfRelIsoDB03v1;
+       float pfRelIsoDB03v2;
+       float pfRelIso04v1;
+       float pfRelIso04v2;
+       float pfRelIsoDB04v1;
+       float pfRelIsoDB04v2;
+
        int selbit;
 
      ClassDef(Muon, 1)
