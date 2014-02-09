@@ -126,6 +126,10 @@ void ElectronBlock::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
       electronB->scET        = it->superCluster()->energy()/cosh(it->superCluster()->eta());
       electronB->scRawEnergy = it->superCluster()->rawEnergy();
 
+      electronB->dist_vec  = it->userFloat("dist");
+      electronB->dCotTheta = it->userFloat("dcot");
+      electronB->hasMatchedConv = (it->userInt("antiConv") ? true : false);
+
       // Vertex association
       double minVtxDist3D = 9999.;
       int indexVtx = -1;
@@ -158,8 +162,7 @@ void ElectronBlock::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
       electronB->relIso   = (it->trackIso() + it->ecalIso() + it->hcalIso())/it->pt();
 
       // PF based isolation
-      electronB->pfRelIso = 
-	it->chargedHadronIso() + std::max(0.0, it->neutralHadronIso() + it->photonIso() - 0.5 * it->puChargedHadronIso())/it->pt();
+      electronB->pfRelIso = it->userFloat("PFRelIsoDB04");
 
       // PFlow isolation information
       electronB->chargedHadronIso = it->chargedHadronIso();
@@ -177,8 +180,16 @@ void ElectronBlock::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
       electronB->nBrems = it->numberOfBrems();
       electronB->fbrem  = it->fbrem();
 
-      electronB->idMVA = it->electronID("mvaNonTrigV0");
- 
+      // MVA
+      electronB->mva = it->userFloat("mva");
+      electronB->mvaPOGTrig = it->userFloat("mvaPOGTrig");
+      electronB->mvaPOGNonTrig = it->userFloat("mvaPOGNonTrig");
+      electronB->mvaPreselection = (it->userInt("mvaPreselection") ? true : false); 
+      electronB->isTriggerElectron = (it->userInt("isTriggerElectron") ? true : false); 
+
+      // MVA Iso
+      electronB->isoMVA = it->userFloat("eleIsoMVA");
+
       // Fiducial flag 
       int fidFlag = 0;
       if (it->isEB())        fidFlag |= (1 << 0);
@@ -195,6 +206,24 @@ void ElectronBlock::analyze(const edm::Event& iEvent, const edm::EventSetup& iSe
       electronB->vx = vertex.x();             
       electronB->vy = vertex.y();             
       electronB->vz = vertex.z();             
+     
+      electronB->pfRelIso03v1 = it->userFloat("PFRelIso03v1");
+      electronB->pfRelIso03v2 = it->userFloat("PFRelIso03v2");
+      electronB->pfRelIsoDB03v1 = it->userFloat("PFRelIsoDB03v1");
+      electronB->pfRelIsoDB03v2 = it->userFloat("PFRelIsoDB03v2");
+      electronB->pfRelIsoDB03v3 = it->userFloat("PFRelIsoDB03v3");
+
+      electronB->pfRelIso04v1 = it->userFloat("PFRelIso04v1");
+      electronB->pfRelIso04v2 = it->userFloat("PFRelIso04v2");
+      electronB->pfRelIsoDB04v1 = it->userFloat("PFRelIsoDB04v1");
+      electronB->pfRelIsoDB04v2 = it->userFloat("PFRelIsoDB04v2");
+      electronB->pfRelIsoDB04v3 = it->userFloat("PFRelIsoDB04v3");
+
+      // 2012
+      electronB->pfRelIso03 = it->userFloat("PFRelIso03");
+      electronB->pfRelIso04 = it->userFloat("PFRelIso04");
+      electronB->pfRelIsoDB03 = it->userFloat("PFRelIsoDB03");
+      electronB->pfRelIsoDB04 = it->userFloat("PFRelIsoDB04");
     }
   } 
   else {
