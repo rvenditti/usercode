@@ -7,6 +7,7 @@
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDAnalyzer.h"
 #include "FWCore/Framework/interface/Event.h"
+#include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
@@ -20,6 +21,7 @@ class TauBlock : public edm::EDAnalyzer
 {
 private:
   virtual void beginJob();
+  const TransientTrackBuilder* trackBuilder_;
   virtual void beginRun(edm::Run const& iRun, edm::EventSetup const& iSetup) {}
   virtual void analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup);
   virtual void endJob() {}
@@ -27,6 +29,8 @@ private:
 public:
   explicit TauBlock(const edm::ParameterSet& iConfig);
   virtual ~TauBlock();
+
+  static const reco::PFJetRef& getJetRef(const reco::PFTau& tau);
 
   enum {
     kMaxTau = 100
